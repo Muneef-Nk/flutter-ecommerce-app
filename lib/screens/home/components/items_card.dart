@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/product.dart';
+import '../../details/details_screen.dart';
 class Items extends StatelessWidget {
-
+final index;
+// final Function press;
   const Items({
-    super.key,
+    this.index,
+    // required this.press,
   });
 
   @override
@@ -12,20 +15,27 @@ class Items extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          padding: EdgeInsets.all(10),
-          // width: 160,
-          // height: 180,
-          decoration: BoxDecoration(
-              color: products[0].color,
-              borderRadius: BorderRadius.circular(20)
+        GestureDetector(
+          // onTap: press,
+          onTap: ()=>Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => DetailsScreen(
+          index: index,
+        ))),
+          child: Container(
+            padding: EdgeInsets.all(10),
+            // width: 160,
+            // height: 180,
+            decoration: BoxDecoration(
+                color: products[index].color,
+                borderRadius: BorderRadius.circular(20)
 
+            ),
+            child: Image.asset(products[index].image),
           ),
-          child: Image.asset(products[0].image),
         ),
         SizedBox(height: 4,),
-        Text(products[2].title, style: TextStyle(fontSize: 15, color: Colors.grey),),
-        Text('\$${products[0].price}', style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),),
+        Text(products[index].title, style: TextStyle(fontSize: 15, color: Colors.grey),),
+        Text('\$${products[index].price}', style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),),
       ],
     );
   }
